@@ -39,7 +39,7 @@ export class ProductsService {
   }
 
   getById(id): Promise<any> {
-    this.product = {_id: '', name: '', brand: ''};
+    this.product = {_id: '', name: '', brand: '',price:0};
     return this.httpClient.get(`${this.productsApi}/${id}`).toPromise().then(prod => prod).catch(ProductsService.error);
   }
 

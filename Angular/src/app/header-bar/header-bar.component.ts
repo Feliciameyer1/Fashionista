@@ -73,6 +73,9 @@ export class HeaderBarComponent implements OnInit {
   routeToRegistration(): void {
     this.router.navigate(['/register', {trigger: this.parent.toUpperCase()}]);
   }
+  routeToCreation(): void {
+    this.router.navigate(['/create', { trigger: this.parent.toUpperCase() }]);
+  }
 
   unimplemented(direct: boolean = true): void {
     if (direct) {

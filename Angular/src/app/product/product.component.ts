@@ -13,6 +13,7 @@ export class ProductComponent implements OnInit {
   @Input() productId;
   @Input() productName;
   @Input() productBrand;
+  @Input() productPrice;
   @Input() cartCount;
   @Input() displayType = ''; // 'all' or 'cart' or 'wishlist'
   @Input() userType = '';
@@ -32,6 +33,7 @@ export class ProductComponent implements OnInit {
         this.ps.getById(this.productId).then(product => {
           this.productName = product.name;
           this.productBrand = product.brand;
+          this.productPrice= product.price;
         });
         // console.log(`updated product in ${this.displayType}:`, {_id: this.productID, name: this.productName, brand: this.productBrand});
     }
