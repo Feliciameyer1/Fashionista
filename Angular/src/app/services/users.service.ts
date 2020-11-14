@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {ProductsService} from './products.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -25,9 +26,9 @@ export class UsersService {
     this.user.subscribe(_user => this.wishlist.next(_user.wishlist));
   }
 
-  private usersApi = '/api/users';
-  private cartsApi = '/api/carts';
-  private wishlistsApi = '/api/wishlists';
+  private usersApi = `${environment.api_url}/api/users`;
+  private cartsApi = `${environment.api_url}/api/carts`;
+  private wishlistsApi = `${environment.api_url}/api/wishlists`;
 
   user;
   users;

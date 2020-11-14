@@ -30,14 +30,14 @@ export class LoginComponent implements OnInit {
 
   submitLoginForm(): void {
     if (this.form.valid) {
-      // console.log(this.form.getRawValue());
+      console.log(this.form.getRawValue());
       this.auth.login(this.form.getRawValue()).then(status => {
         if (!status) {
           console.log(status);
-          // console.log('Failed login.');
+           console.log('Failed login.');
           this.failedLogin = true;
         } else {
-          // console.log('Successful login.');
+           console.log('Successful login.');
           this.us.getUserById(this.auth.user._id).then(() => this.router.navigate([`/${this.auth.user.type}`, {trigger: 'SIGN_IN'}]));
 
         }

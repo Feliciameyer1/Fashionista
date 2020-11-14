@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {UsersService} from './users.service';
 import {HttpClient} from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class AuthService {
   private LASTNAME_KEY = 'fashionista-auth-lastName';
 
   private TTL = 1000 * 60 * 10;
-  private authApi = '/api/login';
+  private authApi = `${environment.api_url}/api/login`;
 
   private currentUser = {};
   private loggedInStatus = false;
@@ -70,7 +71,7 @@ export class AuthService {
 
   login(user): Promise<boolean> {
     const {email, password} = user;
-    // console.log('authenticating login...');
+     console.log('authenticating login...');
     return new Promise<boolean>((resolve, reject) => {
       setTimeout(() => reject('No response.'), 10000);
       if (email && password) {

@@ -3,6 +3,7 @@ const User = require('../models/user.schema');
 
 router.post("/login", async(req, res) => {
     const data = req.body;
+    console.log(data);
     const user = await User.findOne({email: data.email, password: data.password});
     if(!user){
         res.status(401).json({error: 'Database Error: No User Found'});

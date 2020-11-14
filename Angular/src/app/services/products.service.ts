@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject} from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class ProductsService {
     this.products = new BehaviorSubject<Array<any>>([]);
   }
 
-  private productsApi = '/api/products';
+  private productsApi = `${environment.api_url}/api/products`;
 
   products;
   product;
