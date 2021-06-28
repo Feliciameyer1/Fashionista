@@ -1,7 +1,5 @@
 import {Injectable} from '@angular/core';
-import {UsersService} from './users.service';
 import {HttpClient} from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +16,7 @@ export class AuthService {
   private LASTNAME_KEY = 'fashionista-auth-lastName';
 
   private TTL = 1000 * 60 * 10;
-  private authApi = `${environment.api_url}/api/login`;
+  private authApi = '/api/login';
 
   private currentUser = {};
   private loggedInStatus = false;
@@ -36,8 +34,6 @@ export class AuthService {
 
   get loggedIn(): boolean {
     return !!this.getWithExpiry(this.KEY);
-    this.loggedInStatus = this.loggedInStatus && !!this.getWithExpiry(this.KEY);
-    return this.loggedInStatus;
   }
 
   // Error handling
@@ -50,8 +46,7 @@ export class AuthService {
   private static setWithExpiry(key, value, ttl): void {
     const now = new Date();
 
-    // `item` is an object which contains the original value
-    // as well as the time when it's supposed to expire
+    //contain original value along with expire time
     const item = {
       value,
       expiry: now.getTime() + ttl,
@@ -71,7 +66,6 @@ export class AuthService {
 
   login(user): Promise<boolean> {
     const {email, password} = user;
-     console.log('authenticating login...');
     return new Promise<boolean>((resolve, reject) => {
       setTimeout(() => reject('No response.'), 10000);
       if (email && password) {
@@ -80,19 +74,6 @@ export class AuthService {
         resolve(false);
       }
     });
-
-    // // console.log(user);
-    // const { _id, email, type } = user;
-    // if (_id && email && type) {
-    //   this.currentUser = { _id, email, type };
-    //   // @ts-ignore
-    //   // if (!this.currentUser.cart) { this.currentUser.cart = []; }
-    //   // @ts-ignore
-    //   // if (!this.currentUser.wishlist) { this.currentUser.wishlist = []; }
-    //   this.remove(this.KEY);
-    //   this.setWithExpiry(this.KEY, user._id, this.TTL);
-    // }
-    // return this.currentUser;
   }
 
   authUser(user): Promise<boolean> {
@@ -103,7 +84,6 @@ export class AuthService {
         console.log(error);
         return false;
       } else {
-        // console.log('saving user');
         this.currentUser = {_id, email: user.email, firstName, lastName, type};
         AuthService.remove(this.KEY);
         AuthService.setWithExpiry(this.KEY, _id, this.TTL);
@@ -133,7 +113,7 @@ export class AuthService {
   private getWithExpiry(key): number {
     const itemStr = localStorage.getItem(key);
 
-    // if the item doesn't exist, return null
+    // If item doesn't exist then return null
     if (!itemStr) {
       return null;
     }
@@ -143,10 +123,9 @@ export class AuthService {
 
     localStorage.removeItem(key);
 
-    // compare the expiry time of the item with the current time
+    // Compare expire time to current time
     if (now.getTime() > item.expiry) {
-      // If the item is expired, delete the item from storage
-      // and return null
+      //If expired then delete item from storage and return null
       return null;
     } else {
       AuthService.setWithExpiry(key, item.value, this.TTL);

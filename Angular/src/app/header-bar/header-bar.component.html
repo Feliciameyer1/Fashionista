@@ -10,10 +10,10 @@
     <button class="btn btn-success" (click)="routeToRegistration()">Register User</button>
   </div>
   <div *ngIf="!parents.user.includes(parent) && loggedInUserType" class=" ml-2">
-    <button class="btn btn-warning btn-dark" (click)="routeToUserPortal()">User Portal</button>
+    <button class="btn btn-warning text-light" (click)="routeToUserPortal()">User Portal</button>
   </div>
   <div *ngIf="!parents.admin.includes(parent) && loggedInUserType === 'admin'" class=" ml-2">
-    <button class="btn btn-warning btn-dark" (click)="routeToAdminPortal()">Admin Portal</button>
+    <button class="btn btn-warning text-light" (click)="routeToAdminPortal()">Admin Portal</button>
   </div>
   <div class="col">
     <div *ngIf="loggedInUserType" class="float-right">

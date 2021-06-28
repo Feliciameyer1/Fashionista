@@ -1,0 +1,41 @@
+<app-header-bar [parent]="title"></app-header-bar>
+<div class = "text-center body-div" style = "">
+  <form [formGroup]="form" class="form-signin" (ngSubmit)="submitRegisterForm()">
+    <h3 class="mb-3 font-weight-normal">Please create account</h3>
+
+    <label for="inputFirstname" class="sr-only">First Name</label>
+    <input type="text" class="form-control" id="inputFirstname" [formControlName]="'firstName'" placeholder="First Name" autofocus autocomplete="off"/>
+
+    <label for="inputLastName" class="sr-only">Last Name</label>
+    <input type="text" class="form-control" id="inputLastName" [formControlName]="'lastName'" placeholder="Last Name" autofocus autocomplete="off"/>
+
+    <label for="inputEmail" class="sr-only">Email</label>
+    <input type="text" class="form-control" id="inputEmail" [formControlName]="'email'" placeholder="Email" autofocus autocomplete="off"/>
+
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" class="form-control" id="inputPassword" [formControlName]="'password'" placeholder="Password" autocomplete="off"/>
+
+    <div *ngIf="loggedInUserType === 'admin'" class="col">
+      <label>Account type:</label>
+      <div class="m-2 btn-group dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="productOptions" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false" [textContent]="userType.charAt(0).toUpperCase() + userType.slice(1)">
+        </button>
+        <div>
+          <div class="dropdown-menu" aria-labelledby="userTypeOptions">
+            <button class="dropdown-item" (click)="userType = 'user'">User</button>
+            <button class="dropdown-item" (click)="userType = 'admin'">Admin</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p *ngIf="failedRegistration" class="h6 mb-3 text-muted" style="font-size: 14px; color: crimson; border: 1px crimson;">
+      Registration details are invalid. Please retry
+    </p>
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="form.invalid">Register</button>
+    <br>
+    <button class="btn btn-lg btn-outline-primary btn-block" (click)="routeToLogin()">Existing Account</button>
+  </form>
+
+</div>

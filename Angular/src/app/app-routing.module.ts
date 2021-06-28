@@ -5,7 +5,7 @@ import {AuthGuard} from './guards/auth.guard';
 import {AdminPortalComponent} from './admin-portal/admin-portal.component';
 import {AdminGuard} from './guards/admin.guard';
 import {LoginComponent} from './login/login.component';
-import {RegisterUserComponent} from './register-user/register-user.component';
+import {RegisterComponent} from './register/register.component';
 import { ProductCreateComponent } from './product-create/product-create.component';
 
 const routes: Routes = [
@@ -13,8 +13,8 @@ const routes: Routes = [
   { path: 'user', component: UserPortalComponent, canActivate: [AuthGuard] },
   {path: 'admin', component: AdminPortalComponent, canActivate: [AuthGuard, AdminGuard]},
   {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterUserComponent},
-  { path: 'create', component: ProductCreateComponent, canActivate: [AuthGuard, AdminGuard] }
+  {path: 'register', component: RegisterComponent},
+  {path: 'createProduct', component: ProductCreateComponent, canActivate: [AuthGuard, AdminGuard]}
 ];
 
 @NgModule({
